@@ -1,0 +1,45 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+    "title": "Windows WSL Distro",
+    "publisher": "Luca Cappa",
+    "description": "Installs the desired WSL distribution",
+    "tags": [
+        "WSL",
+        "debian",
+        "kali",
+        "ubuntu",
+        "sles"
+    ],
+    "targetOsType": "Windows",
+    "parameters": {
+        "Distro": {
+            "type": "string",
+            "displayName": "The Linux distro name to install",
+            "description": "Specifies the specific WSL distribution to install",
+            "defaultValue": "ubuntu-1804",
+            "allowEmpty": true,
+            "allowedValues": [
+                "debian-gnulinux",
+                "kali-linux-new",
+                "ubuntu-1604",
+                "ubuntu-1804",
+                "sles-12"
+            ]
+        },
+        "Username": {
+            "type": "string",
+            "displayName": "Username",
+            "description": "Username",
+            "defaultValue": ""
+        },
+        "Password": {
+            "type": "string",
+            "displayName": "Password",
+            "description": "Password",
+            "defaultValue": ""
+        }
+    },
+    "runCommand": {
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./install-wsl-distro.ps1 -Distro ''', parameters('Distro'), ''' -Username ''', parameters('Username'), ''' -Password ''', parameters('Password'), '''\"')]"
+    }
+}
